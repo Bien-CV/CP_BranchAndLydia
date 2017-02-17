@@ -70,7 +70,8 @@ Domain BranchAndPrune(Problem P){
 int main(){
   Problem P(4);
   P.afficher();
-  Domain Sol = BranchAndPrune(P);
+  Domain solution = BranchAndPrune(P);
   cout<<"Solution : "<<endl;
-    return 0;
+  solution.afficher();
+  return 0;
 }

@@ -18,11 +18,12 @@ class Domain
     int smallestDom();
     list<int> * getLDomain();
     void setLDomain(list<int> s, int i);
-
+    list<int> *LDomain;
+    
     private:
 
     int n;
-    list<int> *LDomain;
+    
 };
 
 #endif
