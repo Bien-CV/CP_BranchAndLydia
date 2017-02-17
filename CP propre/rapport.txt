@@ -1,0 +1,20 @@
+La fonction BranchAndPrune du fichier main.cpp représente l'algorithme décrit sur l'énoncé de TP.
+
+On utilise les classes Problem, Domain et Constraint.
+
+Une instance de Problem contient un ensemble de contraintes de classe Constraint et un ensemble de domaines de classe Domain.
+Les noeuds de l'arbre de backtracking sont des ensembles de domaines.
+
+La classe Constraint est configurée pour le problème des reines.
+On utilise la représentation d'un xi par ligne (ou colonne). 
+Par conséquent les contraintes sont :
+-sur les colonnes : X[xi]!=X[xj]
+-sur les diagonales montantes : X[xi]+i!=X[xj]+j
+-sur les diagonales descendantes : X[xi]-i!=X[xj]-j
+On vérifie pour un domaine F, chacune de ses contraintes X[xi]+i!=X[xj]+j, en ayant paramétré les xi, xj, i et j pour chaque contrainte (cf classe Problem).
+Cette façon de faire n'empêche pas de modéliser d'autres problèmes en changeant ces contraintes ou en sous-classant Constraint.
+
+On parcourt l'arbre en se limitant aux noeuds possibles.
+
+Ce code ne fonctionne pas suite à une mauvaise gestion de la mémoire dynamique:
+La liste des noeuds (L) stocke toujours la même valeur sur tous ses noeuds.

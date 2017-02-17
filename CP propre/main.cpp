@@ -32,7 +32,6 @@ Domain BranchAndPrune(Problem P){
     F.afficher();
     if(F.isEmpty()||!P.verifCte(F)){
       //delete &F;
-      cout<<"ça va pas là"<<endl;
     }
     else{
       if(P.isSolution(F)){ //verifie taille domaines + ctes
@@ -50,7 +49,7 @@ Domain BranchAndPrune(Problem P){
             reset.push_back(v);
             G.getLDomain()[xi]=reset;
           //  G.afficher();
-            L.push(G); //ERREUR A LA CON LA DESSUS
+            L.push(G); //ERREUR
 
           /*
             //L.front().afficher();
