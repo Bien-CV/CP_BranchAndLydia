@@ -4,39 +4,71 @@
 
 using namespace std;
 
-class Ctype{
-	public:
-};
-
-set<int> prune(set<int> E, Ctype C){
-	return E;
-}
-
-bool isASolution(set<int> F){
-	return true;
-}
-
 class Problem{
-	public:
-	
+public:
+	int n;
+	int X[];
+	set<int> D[]; //mon ensemble de domaine aura toujours une taille n
+	//string type;
+	bool isASolution(list< set<int> > F){
+			/*int i,j;
+			//F ne doit contenir qu'un seul elmt
+			for(i=0;i<n;i++){
+				if(F[i].size()>1){
+					return false;
+				}
+			}
+			//verif lignes
+			for(i=0;i<n;i++){
+				for(j=i;j<n;j++){
+					if(F[i][1]==F[j][1]){
+						return false;
+					}
+				}
+			}
+			//verif colonnes -> implicite à la declaration
+			//verif diagonnales montantes
+			for(i=0;i<n;i++){
+				for(j=0;j<n;j++){
+					if(F[i][1]+i==F[j][1]+j){
+						return false;
+					}
+				}
+			}
+			//verif diagonales descendantes
+			for(i=0;i<n;i++){
+				for(j=0;j<n;j++){
+					if(F[i][0]-i==F[j][0]-j){
+						return false;
+					}
+				}
+			}*/
+		//F.get(0);
+		return true;
+	}
+
+	list< set<int> > prune(list< set<int> > F, set <int> E){
+		return F;
+	}
+
 };
 
-set<int> branchAndPrune(int X[],Ctype C, list< set<int> > D)
+list< set<int> > branchAndPrune(Problem P)
 //avec X variables, C contraintes et D domaines des variables
 {
-	list< set<int> > L = D;
+	set<int> L[P.n] = P.D;
 	set<int> E;
-	set<int> F;
+	list< set<int> > F;
 	while ( !L.empty() )
 	{
 		E = L.front();
 		L.pop_front();
-		F = prune(E,C);
+		F = P.prune(F,E);
 		if ( F.empty()){
 			F.clear(); //reinitialiser F
 		}else
 		{
-			if ( isASolution(F)){
+			if ( P.isASolution(F)){
 				return F; //renvoyer F
 			}else
 			{

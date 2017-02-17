@@ -45,7 +45,7 @@ Domain Problem::getD(){
 
 bool Problem::isSolution(Domain F){
   for(int i=0;i<n;i++){
-    if(F.LDomain[i].size()>1){
+    if(F.getLDomain()[i].size()>1){
       cout<<"taille pas bonne"<<endl;
       return false;
     }

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <list>
-#include <list>
+#include <set>
 
 using namespace std;
 
@@ -16,8 +16,10 @@ class Domain
     void afficher();
     bool isEmpty();
     int smallestDom();
+    list<int> * getLDomain();
+    void setLDomain(list<int> s, int i);
 
-    //private:
+    private:
 
     int n;
     list<int> *LDomain;

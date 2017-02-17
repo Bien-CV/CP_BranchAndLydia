@@ -32,7 +32,7 @@ void Domain::afficher()
     cout<<i<<" : ";
     for (list<int>::iterator it=LDomain[i].begin(); it!=LDomain[i].end(); ++it)
         std::cout << " "<< *it;
-        std::cout<< '\n';
+    std::cout<< '\n';
   }
 
 }
@@ -53,4 +53,12 @@ int Domain::smallestDom(){
     }
   }
   return smallest;
+}
+
+list<int>* Domain::getLDomain(){
+  return LDomain;
+}
+
+void Domain::setLDomain(list<int> s,int i){
+  LDomain[i]=s;
 }

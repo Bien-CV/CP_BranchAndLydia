@@ -18,7 +18,7 @@ class Problem
     Domain getD();
     bool verifCte(Domain F);
 
-  //  private:
+    private:
 
     int n;
     int m;
