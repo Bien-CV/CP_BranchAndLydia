@@ -1,0 +1,26 @@
+le main = algo principal
+Problem.h + Problem.c -> définition de la classe problème. on y retrouve un
+ensemble de contraintes et un ensemble de domaines (appelé Domain).
+Ces ensembles de domaines on s'en sert aussi pour faire les noeuds (chaque
+noeud correspondra à un ensemble différent dans l'arbre).
+
+Pour l'instant la classe contrainte est configurée pour le problème des reines.
+J'ai choisi la représentation d'un xi par ligne (ou colonne). Du coup les
+contraintes sont :
+-sur les colonnes : X[xi]!=X[xj]
+-sur les diagonales montantes : X[xi]+i!=X[xj]+j
+-sur les diagonales descendantes : X[xi]-i!=X[xj]-j
+Ce qui se modélise très bien en une classe contrainte qui vérifie pour un
+domaine F, pour toutes ses contraintes X[xi]+i!=X[xj]+j, en ayant paramétré
+les xi, xj, i et j pour chaque contrainte (cf classe Problem).
+(On pourra changer ça pour modéliser d'autres problèmes, et faire des sous-classes
+contraintes.)
+
+Il n'y a pas de pruning tout de suite, juste un parcours de l'arbre en se limitant
+quand meme aux noeuds possibles. (comme demandé pour le backtracking).
+
+Le make fonctionne sans problème.
+
+Le problème de mon code tout de suite, c'est que la liste de mes noeuds (L) stocke
+toujours la même valeur sur tous ses noeuds. Si on tombe sur un noeud pas possible,
+l'algo vide donc L, et ça nous avance pas.
