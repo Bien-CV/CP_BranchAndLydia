@@ -23,4 +23,7 @@ Le make fonctionne sans problème.
 
 Le problème de mon code tout de suite, c'est que la liste de mes noeuds (L) stocke
 toujours la même valeur sur tous ses noeuds. Si on tombe sur un noeud pas possible,
-l'algo vide donc L, et ça nous avance pas.
+l'algo vide donc L élément par élément, et ça nous avance pas.
+
+Sur le push (ligne 51 du main), ça stocke toujours 0 0 0123 0123, et il arrive pas
+à s'en débarasser.
