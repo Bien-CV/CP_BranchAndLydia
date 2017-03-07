@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Domain.h"
 
+#define VERBOSE_DOMAIN (0)
 
 using namespace std;
 
@@ -14,14 +15,20 @@ Domain::Domain(int newn) : n(newn)
       D[i].insert(j);
     }
   }*/
+
+  if VERBOSE_DOMAIN cout<<"creer domaine : n = "<<n<<endl;
+  
   n=newn;
-  cout<<"creer domaine : n = "<<n<<endl;
   list<int> s;
-  for(int i=0;i<n;i++)
+  
+  for(int i=0;i<n;i++){
     s.push_back(i);
+  }
+  
   LDomain = new list<int>[n];
   for(int i=0;i<n;i++)
     LDomain[i]=s;
+    
   //D.push_front(s);
 }
 

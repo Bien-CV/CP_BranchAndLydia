@@ -1,6 +1,7 @@
 
 #include "Constraint.h"
-
+#define VERBOSE_CONSTRAINT 0
+ 
 using namespace std;
 
 Constraint::Constraint(){

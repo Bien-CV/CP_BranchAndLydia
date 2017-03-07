@@ -4,7 +4,9 @@
 #include <list>
 #include <vector>
 #include <stack>
+#include <assert.h>
 #include "Problem.h"
+#include <climits>
 
 using namespace std;
 
@@ -67,11 +69,76 @@ Domain BranchAndPrune(Problem P){
   return F;
 }
 
-int main(){
+void domainCreationTests(){
+	int step = INT_MAX / 300;
+	for( int i=INT_MIN; i<INT_MAX; i=i+step ){
+	Domain* tDomain;
+	tDomain = new Domain(i);
+	assert( tDomain->isEmpty() );
+	}
+	
+	
+}
+
+void domainEveryLineIsIndependantTest(){
+	int sizeOfDomain=100;
+	Domain tDomain(sizeOfDomain);
+	list<int> * tLDomain = tDomain.getLDomain();
+	for (int i= 0 ; i< sizeOfDomain-1 ; i++){	
+		assert(tLDomain[i] != tLDomain[i+1]);
+	}
+}
+
+void domainClassTests(){
+	cout<<"TEST: Domain"<<endl;
+	domainCreationTests();
+	domainEveryLineIsIndependantTest();
+	Domain tDomain;
+	
+	return;
+}
+	
+void constraintClassTests(){
+	
+	cout<<"TEST: Constraint"<<endl;
+	Constraint tConstraint;
+	
+	return;
+}
+	
+void problemClassTests(){
+	cout<<"TEST: Problem"<<endl;
+	int initialNewN = 0;
+	Problem tProblem(initialNewN);
+	
+	return;
+}
+	
+void testSuite(){
+	cout<<"Début de la suite de tests"<<endl;
+	
+	
+	domainClassTests();
+	
+	constraintClassTests();
+	
+	problemClassTests();
+	
+	return;
+}
+
+void queen(){
   Problem P(4);
   P.afficher();
   Domain solution = BranchAndPrune(P);
   cout<<"Solution : "<<endl;
   solution.afficher();
+}
+
+int main(){
+  
+  //testSuite();
+  queen();
+  
   return 0;
 }

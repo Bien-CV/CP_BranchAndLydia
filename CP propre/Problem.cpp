@@ -1,14 +1,14 @@
 
 #include "Problem.h"
-
+#define VERBOSE_PROBLEM (0)
 using namespace std;
 
 
 Problem::Problem(int newn) : n(newn){
-  cout<<"creer pb"<<endl;
+  if VERBOSE_PROBLEM cout<<"creer pb"<<endl;
   n=newn;
   D = new Domain(n);
-  cout<<"fin de creation du pb : n = "<<n<<endl;
+  if VERBOSE_PROBLEM cout<<"fin de creation du pb : n = "<<n<<endl;
 
   //ajout des contraintes (reines)
   C = new Constraint[3*n*n-3*n];
