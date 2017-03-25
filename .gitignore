@@ -27,3 +27,6 @@
 *.exe
 *.out
 *.app
+*.properties
+CP propre/nbproject/private/configurations.xml
+*.xml
