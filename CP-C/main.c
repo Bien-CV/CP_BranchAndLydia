@@ -37,7 +37,14 @@ void test_pile_Dom(){
 	
 	pile_Dom* L;
 	Push_dom(&L,*(P->d));
+    //affichage manuel spécifique
     afficherDomain(L->dom);
+    //affichage de toute la pile
+    View_dom(L);
+    
+    Clear_dom(&L);
+    
+    
 }
 Problem* newProblem(int newn);
 void initQueenProblem(Problem* p,int newn );
