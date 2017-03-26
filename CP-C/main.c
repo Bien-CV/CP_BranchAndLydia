@@ -69,11 +69,19 @@ void test_pile_Dom(){
 
 void testEmptyDomain(){
 	
-	Domain * d=newEmptyDomain(2);
+	int nbVariablesMaximum=10;
+	Domain * d=newEmptyDomain(nbVariablesMaximum);
 	
 	addToDomain(d,5,0);
 	addToDomain(d,3541,0);
 	addToDomain(d,6,1);
+	
+	afficherDomain(*d);
+	
+	int tab[]={124,12,10,9,8,7,6,5,4,3,2,1,0,-50};
+	int sizeTab=14;
+	//addLineToDomain ne devrait pas être utilisé dans un tableau n'ayant pas le nombre de variable maximum nécessaire
+	addLineToDomain(d,tab,sizeTab);
 	
 	afficherDomain(*d);
 	

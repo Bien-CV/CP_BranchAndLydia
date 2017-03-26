@@ -59,7 +59,7 @@ void initEmptyDomain(Domain* d, int nbOfVariables){
 
   if(!liste) exit(EXIT_FAILURE);
   
-  d->n = nbOfVariables;
+  d->n = 0;
   
   d->LDomain = liste;
 
@@ -68,9 +68,9 @@ void initEmptyDomain(Domain* d, int nbOfVariables){
 
 void addToDomain(Domain * d,int value,int variable){
 
-  if( variable < d->n ){	  
-	  Push(&(d->LDomain[variable]),value);
-	}
+  if ( variable >= d->n) d->n=variable+1;
+  Push(&(d->LDomain[variable]),value);
+
   return;
 }
 
@@ -85,6 +85,15 @@ Domain * newEmptyDomain(int nbOfVariables){
 	Domain* newDomain=malloc(sizeof(Domain));
 	initEmptyDomain(newDomain,nbOfVariables);
 	return newDomain;
+}
+
+void addLineToDomain(Domain * d, int * tab,int nbElem){
+	int varIndex = d->n;
+	d->n=d->n+1;
+	for(int i=0;i<nbElem;i++){
+		addToDomain(d,tab[i],varIndex);
+	}
+	return;
 }
 
 void destroyDomain(Domain* d){
