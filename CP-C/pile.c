@@ -90,3 +90,21 @@ void clearMatricePile(pile** mat,int size){
 	}
 	return;
 }
+
+
+void findAndDelete(int e,pile* p){
+	if(p->valeur == e){
+		free(p);
+		return;
+	}
+	while(p->prec)
+    {
+        if(p->prec->valeur == e){
+	       pile* tmp= p->prec->prec;
+	       free(p->prec);
+	       p->prec=tmp;
+	       return;
+		}
+		p = p->prec;
+    }
+}

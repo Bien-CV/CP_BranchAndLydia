@@ -9,14 +9,15 @@ typedef struct Problem
 {
     int n;
     int m;
-    Domain D;
-    Constraint *C;
+    Domain* d;
+    Constraint *c;
 }Problem;
 
-void initProblem(Problem p,int newn );
+Problem* newProblem(int newn);
+void destroyProblem(Problem * p);
+void initQueenProblem(Problem* p,int newn );
 void afficherProblem(Problem p);
-bool isSolution(Domain F, Problem p);
-Domain getD();
-bool verifCte(Domain F);
+bool isSolution(Domain d, Problem p);
+bool verifCtes(Problem p, Domain d);
 
 #endif

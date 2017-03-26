@@ -10,28 +10,32 @@
 #include "pile_Dom.h"
 
 
-void test_pile_Dom(){
-	/*
-	void Push_dom(pile_Dom **, Domain);
-	Domain Pop_dom(pile_Dom **);
-	void Clear_dom(pile_Dom **);
-	int Length_dom(pile_Dom *p);
-	void View_dom(pile_Dom *);
-	*/
-}
-
 void test_Domain(){
 	int newn=5;
 	Domain * d=newDomain(newn);
 		
 	afficherDomain(*d);
 	destroyDomain(d);
-	//isEmpty(*d);
-	//smallestDom(*d);
-	//biggestDom(*d);
 
 }
-
+void test_Problem(){
+	int newn=5;
+	Domain * d=newDomain(newn);
+	
+	Problem* p=newProblem(10);
+	
+	afficherProblem(*p);
+	isSolution(*d,*p);
+	verifCtes(*p,*d);
+	
+	destroyDomain(d);
+	destroyProblem(p);
+}
+Problem* newProblem(int newn);
+void initQueenProblem(Problem* p,int newn );
+void afficherProblem(Problem p);
+bool isSolution(Domain d, Problem p);
+bool verifCtes(Problem p, Domain d);
 /*
 Domain BranchAndPrune(Problem P){
   pile_Dom L;
@@ -83,7 +87,8 @@ int resoudreReines(int taille){
 */
 int main()
 {
-		test_Domain();
+		//test_Domain();
+		test_Problem();
       /*  pile *MaPile = NULL;
 
         Push(&MaPile, 10);

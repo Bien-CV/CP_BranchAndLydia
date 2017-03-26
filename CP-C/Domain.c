@@ -9,6 +9,28 @@ valeur aux bornes, suppression d’une valeur quelconque
 
 */
 
+Domain* copyDomain(Domain* d){
+	Domain * cpy = malloc(sizeof(Domain));
+	return cpy;
+}
+
+int deleteValue(Domain* d,int variable, int e){
+	findAndDelete(e,(d->LDomain)[variable]);
+	return 1;
+}
+
+int getValue(Domain* d,int variable, int col){
+	
+	return 0;
+}
+
+int deleteMin(Domain* d,int variable){
+	return 0;
+}
+int deleteMax(Domain* d,int variable){
+	
+	return 0;
+}
 
 void initDomain(Domain* d, int newn){
 
@@ -23,7 +45,7 @@ void initDomain(Domain* d, int newn){
 	}
   
   d->n = newn;
-  printf("Initialisation, n = %d\n",d->n);
+  //printf("Initialisation, n = %d\n",d->n);
   d->LDomain = liste;
 
   return;
