@@ -37,12 +37,13 @@ void test_pile_Dom(){
 	
 	pile_Dom* L;
 	Push_dom(&L,*(P->d));
+	//Pop_dom(&L);
     //affichage manuel spécifique
-    afficherDomain(L->dom);
+    //afficherDomain(L->dom);
     //affichage de toute la pile
     View_dom(L);
     
-    Clear_dom(&L);
+    //Clear_dom(&L);
     
     
 }
