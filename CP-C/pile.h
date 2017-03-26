@@ -1,6 +1,6 @@
 #ifndef CGI_PILE_H
 #define CGI_PILE_H
-
+#define MAX_NB_OF_VARIABLES_EMPTY_DOMAIN 200
  /*  Structure représantant un élément de la pile. */
 
         typedef struct pile
@@ -43,7 +43,7 @@ extern "C" {
 		void afficheMatricePile(pile** mat,int size);
 		
 		void clearMatricePile(pile** mat,int size);
-			
+		pile ** newEmptyMatricePile();
 #ifdef __cplusplus
 }
 #endif

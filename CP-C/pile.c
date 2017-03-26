@@ -69,7 +69,10 @@ pile ** newMatricePile(int newn){
 	pile** newMatrix=malloc(sizeof(pile*)*newn);
 	return (newMatrix);
 }
-
+pile ** newEmptyMatricePile(){
+	pile** newMatrix=malloc(sizeof(pile*)*MAX_NB_OF_VARIABLES_EMPTY_DOMAIN);
+	return (newMatrix);
+}
 
 void afficheMatricePile(pile** mat,int size){
 	assert(size >= 0 );

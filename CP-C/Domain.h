@@ -19,6 +19,7 @@ bool isEmpty(Domain d);
 int smallestDom(Domain d);
 int biggestDom(Domain d);
 Domain * newDomain(int newn);
-//pile** getLDomain(Domain d);
-//void setLDomain(Domain d,pile* s, int i);
+void initEmptyDomain(Domain* d, int nbOfVariables);
+Domain * newEmptyDomain(int nbOfVariables);
+void addToDomain(Domain * d,int value,int variable);
 #endif

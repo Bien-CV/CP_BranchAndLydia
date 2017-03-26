@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "Domain.h"
+#include "pile.h"
 /*
 Un domaine est représenté par un ensemble ordonné d’entiers. Ce type est muni au moins
 des opérations suivantes outre la création : copie, accès aux valeurs, suppression d’une
@@ -52,9 +53,37 @@ void initDomain(Domain* d, int newn){
   return;
 }
 
+void initEmptyDomain(Domain* d, int nbOfVariables){
+
+  pile ** liste = newEmptyMatricePile(nbOfVariables);
+
+  if(!liste) exit(EXIT_FAILURE);
+  
+  d->n = nbOfVariables;
+  
+  d->LDomain = liste;
+
+  return;
+}
+
+void addToDomain(Domain * d,int value,int variable){
+
+  if( variable < d->n ){	  
+	  Push(&(d->LDomain[variable]),value);
+	}
+  return;
+}
+
+
 Domain * newDomain(int newn){
 	Domain* newDomain=malloc(sizeof(Domain));
 	initDomain(newDomain, newn);
+	return newDomain;
+}
+
+Domain * newEmptyDomain(int nbOfVariables){
+	Domain* newDomain=malloc(sizeof(Domain));
+	initEmptyDomain(newDomain,nbOfVariables);
 	return newDomain;
 }
 

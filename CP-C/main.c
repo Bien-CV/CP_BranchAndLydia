@@ -66,6 +66,20 @@ void test_pile_Dom(){
     
     
 }
+
+void testEmptyDomain(){
+	
+	Domain * d=newEmptyDomain(2);
+	
+	addToDomain(d,5,0);
+	addToDomain(d,3541,0);
+	addToDomain(d,6,1);
+	
+	afficherDomain(*d);
+	
+	destroyDomainContent(*d);
+	free(d);
+}
 Problem* newProblem(int newn);
 void initQueenProblem(Problem* p,int newn );
 void afficherProblem(Problem p);
@@ -125,7 +139,8 @@ int main()
 		//test_pile();
 		//test_Domain();
 		//test_Problem();
-		test_pile_Dom();
+		//test_pile_Dom();
+		testEmptyDomain();
       /*  pile *MaPile = NULL;
 
         Push(&MaPile, 10);
