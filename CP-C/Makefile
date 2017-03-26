@@ -1,11 +1,14 @@
 
 all: cpc
 
-cpc : main.o pile.o Problem.o Domain.o Constraint.o
-	$(CC) -o cpc main.o pile.o Problem.o Domain.o Constraint.o
+cpc : main.o pile.o pile_Dom.o Problem.o Domain.o Constraint.o
+	$(CC) -o cpc main.o pile.o pile_Dom.o Problem.o Domain.o Constraint.o
 
 pile.o: pile.c
 	$(CC) -o pile.o -c pile.c -W -Wall
+	
+pile_Dom.o: pile_Dom.c
+	$(CC) -o pile_Dom.o -c pile_Dom.c -W -Wall
 
 Constraint.o : Constraint.c
 	$(CC) -o Constraint.o -c Constraint.c -W -Wall

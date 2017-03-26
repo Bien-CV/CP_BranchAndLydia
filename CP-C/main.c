@@ -6,6 +6,7 @@
 #include "Constraint.h"
 #include "Domain.h"
 #include "pile.h"
+#include "pile_Dom.h"
 
 int main()
 {
