@@ -9,9 +9,11 @@ void initDomain(Domain* d, int newn){
 
   if(!liste) exit(EXIT_FAILURE);
   
-  for(int i = 0;i<newn;i++){
-    Push(&liste[i],i);
-  }
+  for(int i=0;i<newn;i++){
+	  for(int j = 0;j<newn;j++){
+		Push(&liste[i],j);
+	  }
+	}
   
   d->n = newn;
   printf("Initialisation, n = %d\n",d->n);
@@ -26,8 +28,15 @@ Domain * newDomain(int newn){
 	return newDomain;
 }
 
+void destroyDomain(Domain* d){
+	clearMatricePile(d->LDomain,d->n);
+	free(d->LDomain);
+	free(d);
+	return;
+}
 void afficherDomain(Domain d){
   printf("afficherDomain: n = %d\n",d.n);
+  afficheMatricePile(d.LDomain,d.n);
 	return;
 }
 
@@ -35,7 +44,7 @@ bool isEmpty(Domain d){
   bool empty = false;
   for(int i=0;i<d.n;i++){
     empty = empty && (Length(d.LDomain[i])==0);
-    printf("%d",Length(d.LDomain[i])==0);
+    //printf("%d",Length(d.LDomain[i])==0);
   }
 	return empty;
 }

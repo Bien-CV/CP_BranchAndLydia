@@ -45,10 +45,10 @@ int Length(pile *p)
 {
         int n=0;
         while(p)
-          {
-              n++;
-              p = p->prec;
-          }
+        {
+            n++;
+            p = p->prec;
+        }
         return n;
 }
 
@@ -58,15 +58,35 @@ void View(pile *p)
 {
         while(p)
           {
-             printf("%d\n",p->valeur);
+             printf("%3d ",p->valeur);
              p = p->prec;
           }
 }
 
 pile ** newMatricePile(int newn){
 	pile** newMatrix=malloc(sizeof(pile*)*newn);
-	for(int i = 0;i<newn;i++){
-		newMatrix[i]=malloc(sizeof(pile)*newn);
-	}
 	return (newMatrix);
+}
+
+
+void afficheMatricePile(pile** mat,int size){
+	for(int i = 0;i<size;i++){
+		if(mat[i]!=NULL) {
+			printf("ligne %4d : ",i+1);
+			View(mat[i]);
+			printf("\n");
+		}else{
+			printf("ligne %4d : Vide\n",i);
+		}
+	}
+	return;
+}
+
+void clearMatricePile(pile** mat,int size){
+	for(int i = 0;i<size;i++){
+		if(mat[i]!=NULL) {
+			Clear(&(mat[i]));
+		}
+	}
+	return;
 }

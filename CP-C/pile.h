@@ -39,6 +39,11 @@ extern "C" {
 
 		pile ** newMatricePile(int newn);
 
+		
+		void afficheMatricePile(pile** mat,int size);
+		
+		void clearMatricePile(pile** mat,int size);
+			
 #ifdef __cplusplus
 }
 #endif

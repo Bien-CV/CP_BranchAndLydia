@@ -25,6 +25,7 @@ void test_Domain(){
 	Domain * d=newDomain(newn);
 		
 	afficherDomain(*d);
+	destroyDomain(d);
 	//isEmpty(*d);
 	//smallestDom(*d);
 	//biggestDom(*d);

@@ -11,6 +11,7 @@ typedef struct Domain
     int n;
 } Domain;
 
+void destroyDomain(Domain* d);
 void initDomain(Domain* d, int newn);
 void afficherDomain(Domain d);
 bool isEmpty(Domain d);
