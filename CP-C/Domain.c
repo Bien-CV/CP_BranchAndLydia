@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Domain.h"
+/*
+Un domaine est représenté par un ensemble ordonné d’entiers. Ce type est muni au moins
+des opérations suivantes outre la création : copie, accès aux valeurs, suppression d’une
+valeur aux bornes, suppression d’une valeur quelconque 
+
+*/
+
 
 void initDomain(Domain* d, int newn){
 
