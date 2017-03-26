@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 
 #include "pile.h"
 
@@ -56,10 +57,11 @@ int Length(pile *p)
 
 void View(pile *p)
 {
-        while(p)
+	pile *tmp=p;
+        while(tmp)
           {
-             printf("%3d ",p->valeur);
-             p = p->prec;
+             printf("%3d ",tmp->valeur);
+             tmp = tmp->prec;
           }
 }
 
@@ -70,6 +72,7 @@ pile ** newMatricePile(int newn){
 
 
 void afficheMatricePile(pile** mat,int size){
+	assert(size >= 0 );
 	for(int i = 0;i<size;i++){
 		if(mat[i]!=NULL) {
 			printf("ligne %4d : ",i+1);

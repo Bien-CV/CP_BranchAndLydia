@@ -35,10 +35,10 @@ Problem* newProblem(int newn){
 	return p;
 }
 
-void destroyProblem(Problem * p){
+void destroyProblemContent(Problem * p){
     destroyDomain(p->d);
+    free(p->d);
     free(p->c);
-    free(p);
 	return;
 }
 

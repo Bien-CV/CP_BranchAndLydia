@@ -32,13 +32,21 @@ Domain Pop_dom(pile_Dom **p)
 
 void Clear_dom(pile_Dom **p)
 {
-        pile_Dom *tmp;
-        while(*p)
+        pile_Dom *head=*p;
+        while(head)
           {
-             tmp = (*p)->prec;
-             destroyDomain(&((*p)->dom));
-             free(*p);
-             *p = tmp;
+             destroyDomainContent(head->dom);
+             head = head->prec;
+          }
+          
+        head=*p;
+        
+        pile_Dom* tmp;
+        while(head)
+          {
+             tmp = head->prec;
+             free(head);
+             head=tmp;
           }
 }
 /*************************************************************************/
@@ -58,9 +66,10 @@ int Length_dom(pile_Dom *p)
 
 void View_dom(pile_Dom *p)
 {
-        while(p)
+	pile_Dom *tmp=p;
+        while(tmp)
           {
-             afficherDomain(p->dom);
-             p = p->prec;
+             afficherDomain(tmp->dom);
+             tmp = tmp->prec;
           }
 }

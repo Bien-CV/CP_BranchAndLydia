@@ -1,6 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include "Domain.h"
 /*
 Un domaine est représenté par un ensemble ordonné d’entiers. Ce type est muni au moins
@@ -59,12 +60,18 @@ Domain * newDomain(int newn){
 
 void destroyDomain(Domain* d){
 	clearMatricePile(d->LDomain,d->n);
-	free(d->LDomain);
-	free(d);
+	//free(d->LDomain);
+	return;
+}
+void destroyDomainContent(Domain d){
+	clearMatricePile(d.LDomain,d.n);
+	free(d.LDomain);
 	return;
 }
 void afficherDomain(Domain d){
   printf("afficherDomain: n = %d\n",d.n);
+  assert(d.LDomain!=NULL);
+  assert(d.n >= 0);
   afficheMatricePile(d.LDomain,d.n);
 	return;
 }

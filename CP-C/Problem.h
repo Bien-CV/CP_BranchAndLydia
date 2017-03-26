@@ -14,7 +14,7 @@ typedef struct Problem
 }Problem;
 
 Problem* newProblem(int newn);
-void destroyProblem(Problem * p);
+void destroyProblemContent(Problem * p);
 void initQueenProblem(Problem* p,int newn );
 void afficherProblem(Problem p);
 bool isSolution(Domain d, Problem p);

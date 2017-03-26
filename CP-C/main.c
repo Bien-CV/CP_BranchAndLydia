@@ -18,6 +18,13 @@ void test_Domain(){
 	destroyDomain(d);
 
 }
+void test_pile(){
+	pile ** p=malloc(sizeof(pile *));
+	for(int i=0;i<3000;i++)
+		Push(p,i);
+	 Clear(p);
+	 free(p);
+}
 void test_Problem(){
 	int newn=5;
 	Domain * d=newDomain(newn);
@@ -29,21 +36,27 @@ void test_Problem(){
 	verifCtes(*p,*d);
 	
 	destroyDomain(d);
-	destroyProblem(p);
+	destroyProblemContent(p);
+	free(p);
 }
 void test_pile_Dom(){
 	
-	Problem* P=newProblem(10);
+	Problem*  P=newProblem(10);
 	
-	pile_Dom* L;
-	Push_dom(&L,*(P->d));
-	//Pop_dom(&L);
+	pile_Dom** L=NULL;
+	L=malloc(sizeof(pile_Dom*));
+	Push_dom(L,*(P->d));
+	//Pop_dom(L);
     //affichage manuel spécifique
     //afficherDomain(L->dom);
     //affichage de toute la pile
-    View_dom(L);
+    View_dom(*L);
     
-    //Clear_dom(&L);
+    Clear_dom(L);
+    
+    destroyProblemContent(P);
+    free(P);
+    free(L);
     
     
 }
@@ -103,6 +116,7 @@ int resoudreReines(int taille){
 */
 int main()
 {
+		//test_pile();
 		//test_Domain();
 		//test_Problem();
 		test_pile_Dom();
