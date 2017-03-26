@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 void Push_dom(pile_Dom **, Domain);
-Domain Pop_dom(pile_Dom **);
+void Pop_dom(pile_Dom **head, Domain * pDomain);
 void Clear_dom(pile_Dom **);
 int Length_dom(pile_Dom *p);
 void View_dom(pile_Dom *);

@@ -46,7 +46,13 @@ void test_pile_Dom(){
 	pile_Dom** L=NULL;
 	L=malloc(sizeof(pile_Dom*));
 	Push_dom(L,*(P->d));
-	//Pop_dom(L);
+	
+	Domain pd;
+	Pop_dom(L,&pd);
+	afficherDomain(pd);
+	destroyDomainContent(pd);
+	destroyDomain(&pd);
+	//free(pd);
     //affichage manuel spécifique
     //afficherDomain(L->dom);
     //affichage de toute la pile

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+
 #include <stdio.h>
 
 #include "pile_Dom.h"
@@ -16,16 +17,16 @@ void Push_dom(pile_Dom **p, Domain newDom)
 }
 /*************************************************************************/
 
-Domain Pop_dom(pile_Dom **p)
+void Pop_dom(pile_Dom **head, Domain * pDomain)
 {
-        Domain newDom;
         pile_Dom *tmp;
         //if(!*p) return NULL;
-        tmp = (*p)->prec;
-        newDom = (*p)->dom;
-        free(*p);
-        *p = tmp;       /* Le pointeur pointe sur le dernier élément. */
-        return newDom;     /* Retourne la valeur soutirée de la pile. */
+        tmp = (*head)->prec;
+        pDomain->LDomain=(*head)->dom.LDomain;
+        pDomain->n=(*head)->dom.n;
+        free(*head);
+        *head = tmp;       /* Le pointeur pointe sur le dernier élément. */
+        return;     /* Retourne la valeur soutirée de la pile. */
 }
 
 /*************************************************************************/
