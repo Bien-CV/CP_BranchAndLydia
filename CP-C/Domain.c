@@ -60,7 +60,6 @@ Domain * newDomain(int newn){
 
 void destroyDomain(Domain* d){
 	clearMatricePile(d->LDomain,d->n);
-	//free(d->LDomain);
 	return;
 }
 void destroyDomainContent(Domain d){
