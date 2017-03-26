@@ -1,4 +1,6 @@
 #include "Problem.h"
+#include <stdio.h>
+
 
 void initProblem(Problem p,int newn ){
   p.n = newn;
@@ -28,21 +30,21 @@ void initProblem(Problem p,int newn ){
 
 }
 
-void afficher(Problem p){
-  afficher(p.D);
+void afficherProblem(Problem p){
+  afficherDomain(p.D);
   return;
 }
 
-bool isSolution(Domain D){
-  for(int i=0;i<n;i++){
-    if(Lenght(D.LDomain[i])>1){
-      cout<<"taille pas bonne"<<endl;
+bool isSolution(Domain d, Problem p){
+  for(int i=0;i<d.n;i++){
+    if(Length(d.LDomain[i])>1){
+      printf("taille pas bonne\n");
       return false;
     }
   }
-  for(int i=0;i<m;i++){
-    if(!C[i].verif(F)){
-      cout<<"contrainte pas bonne"<<endl;
+  for(int i=0;i<p.m;i++){
+    if(!validationContrainte(p.C[i],d)){
+      printf("Contrainte pas bonne\n");
       //break;
       return false;
     }
@@ -50,6 +52,11 @@ bool isSolution(Domain D){
   return true;
 }
 
-bool verifCte(Domain F){
-
+bool verifCtes(Problem p, Domain d){
+  for(int i=0;i<p.m;i++){
+    if(!validationContrainte(p.C[i],d)){
+      return false;
+    }
+  }
+  return true;
 }

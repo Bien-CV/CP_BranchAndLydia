@@ -12,7 +12,7 @@ typedef struct Constraint
 }Constraint;
 
 void initConstraint(Constraint c, int newi, int newj, int newxi, int newxj);
-bool verif(Constraint c, Domain d);
+bool validationContrainte(Constraint c, Domain d);
 
 
 #endif

@@ -14,8 +14,8 @@ typedef struct Problem
 }Problem;
 
 void initProblem(Problem p,int newn );
-void afficher();
-bool isSolution(Domain F);
+void afficherProblem(Problem p);
+bool isSolution(Domain F, Problem p);
 Domain getD();
 bool verifCte(Domain F);
 
