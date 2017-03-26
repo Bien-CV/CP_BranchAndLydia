@@ -37,6 +37,8 @@ extern "C" {
 
         void View(pile *);
 
+		pile ** newMatricePile(int newn);
+
 #ifdef __cplusplus
 }
 #endif

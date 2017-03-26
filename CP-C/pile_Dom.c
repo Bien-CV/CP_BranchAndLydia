@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "pile_Dom.h"
+#include "Domain.h"
 
 /*************************************************************************/
 
@@ -58,7 +59,7 @@ void View_dom(pile_Dom *p)
 {
         while(p)
           {
-             printf("%d\n",p->dom);
+             afficherDomain(p->dom);
              p = p->prec;
           }
 }

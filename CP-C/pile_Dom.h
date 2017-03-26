@@ -8,7 +8,7 @@
         typedef struct pile_Dom
         {
                 Domain dom;
-                struct pile *prec;
+                struct pile_Dom *prec;
         } pile_Dom ;
 
 #ifdef __cplusplus

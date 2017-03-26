@@ -62,3 +62,11 @@ void View(pile *p)
              p = p->prec;
           }
 }
+
+pile ** newMatricePile(int newn){
+	pile** newMatrix=malloc(sizeof(pile*)*newn);
+	for(int i = 0;i<newn;i++){
+		newMatrix[i]=malloc(sizeof(pile)*newn);
+	}
+	return (newMatrix);
+}

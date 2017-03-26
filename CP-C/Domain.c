@@ -3,24 +3,31 @@
 #include <stdio.h>
 #include "Domain.h"
 
-void initDomain(Domain d, int newn){
+void initDomain(Domain* d, int newn){
 
-  pile ** liste = NULL;
-  liste = malloc(newn*sizeof(Domain));
+  pile ** liste = newMatricePile(newn);
 
   if(!liste) exit(EXIT_FAILURE);
+  
   for(int i = 0;i<newn;i++){
     Push(&liste[i],i);
   }
-  d.n = newn;
-  printf("Initialisation, n = %d\n",d.n);
-  d.LDomain = liste;
+  
+  d->n = newn;
+  printf("Initialisation, n = %d\n",d->n);
+  d->LDomain = liste;
 
   return;
 }
 
+Domain * newDomain(int newn){
+	Domain* newDomain=malloc(sizeof(Domain));
+	initDomain(newDomain, newn);
+	return newDomain;
+}
+
 void afficherDomain(Domain d){
-  printf("Affichage, n = %d\n",d.n);
+  printf("afficherDomain: n = %d\n",d.n);
 	return;
 }
 

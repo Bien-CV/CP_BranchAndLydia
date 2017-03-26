@@ -11,11 +11,12 @@ typedef struct Domain
     int n;
 } Domain;
 
-void initDomain(Domain d, int newn);
+void initDomain(Domain* d, int newn);
 void afficherDomain(Domain d);
 bool isEmpty(Domain d);
 int smallestDom(Domain d);
 int biggestDom(Domain d);
-int** getLDomain(Domain d);
-void setLDomain(Domain d,int* s, int i);
+Domain * newDomain(int newn);
+//pile** getLDomain(Domain d);
+//void setLDomain(Domain d,pile* s, int i);
 #endif
