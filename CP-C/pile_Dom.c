@@ -36,6 +36,7 @@ void Clear_dom(pile_Dom **p)
         while(*p)
           {
              tmp = (*p)->prec;
+             destroyDomain(&((*p)->dom));
              free(*p);
              *p = tmp;
           }
