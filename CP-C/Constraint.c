@@ -1,22 +1,20 @@
-#ifndef DEF_CONSTRAINT
-#define DEF_CONSTRAINT
+#include <stdlib.h>
+#include "Constraint.h"
 
-#include <iostream>
-#include <string>
-#include "Domain.h"
+void initConstraint(Constraint c, int newi, int newj, int newxi, int newxj){
 
-class Constraint
-{
-    public:
-    Constraint();
-    Constraint(int newi, int newj, int newxi, int newxj);
-    bool verif(Domain F);
+  c.i = newi;
+  c.j = newj;
+  c.xi = newxi;
+  c.xj = newxj;
+}
 
-    private:
-      int i;
-      int j;
-      int xi;
-      int xj;
-};
-
-#endif
+bool verif(Constraint c, Domain d){
+  if(Length(d.LDomain[smallestDom(d)])<1){
+    return false;
+  }
+  if(Length(d.LDomain[biggestDom(d)])>1){
+    return true;
+  }
+  return (d.LDomain[c.xi].valeur + c.i != d.LDomain[c.xj].valeur + c.j);
+}

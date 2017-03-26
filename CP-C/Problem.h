@@ -9,9 +9,10 @@ typedef struct Problem
 {
     int n;
     int m;
-    Domain *D;
+    Domain D;
     Constraint *C;
-};
+}Problem;
+
 void initProblem(Problem p,int newn );
 void afficher();
 bool isSolution(Domain F);
