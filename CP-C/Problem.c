@@ -43,7 +43,9 @@ void destroyProblem(Problem * p){
 }
 
 void afficherProblem(Problem p){
-  afficherDomain(*(p.d));
+	printf("afficherProblem: n = %d    m = %d\n",p.n,p.m);
+	afficherDomain(*(p.d));
+	//afficherConstraint();
   return;
 }
 
