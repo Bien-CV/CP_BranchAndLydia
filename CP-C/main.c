@@ -31,6 +31,14 @@ void test_Problem(){
 	destroyDomain(d);
 	destroyProblem(p);
 }
+void test_pile_Dom(){
+	
+	Problem* P=newProblem(10);
+	
+	pile_Dom* L;
+	Push_dom(&L,*(P->d));
+    afficherDomain(L->dom);
+}
 Problem* newProblem(int newn);
 void initQueenProblem(Problem* p,int newn );
 void afficherProblem(Problem p);
@@ -88,7 +96,8 @@ int resoudreReines(int taille){
 int main()
 {
 		//test_Domain();
-		test_Problem();
+		//test_Problem();
+		test_pile_Dom();
       /*  pile *MaPile = NULL;
 
         Push(&MaPile, 10);
