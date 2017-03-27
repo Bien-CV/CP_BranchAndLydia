@@ -66,6 +66,11 @@ void test_pile_Dom(){
 
 
 }
+Problem* newProblem(int newn);
+void initQueenProblem(Problem* p,int newn );
+void afficherProblem(Problem p);
+bool isSolution(Domain d, Problem p);
+bool verifCtes(Problem p, Domain d);
 /*
 Domain BranchAndPrune(Problem P){
   pile_Dom L;

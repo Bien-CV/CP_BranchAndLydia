@@ -22,6 +22,6 @@ Domain * newDomain(int newn);
 void initEmptyDomain(Domain* d, int nbOfVariables);
 Domain * newEmptyDomain(int nbOfVariables);
 void addToDomain(Domain * d,int value,int variable);
-void addLineToDomain(Domain * d, int * tab,int nbElem);
 int deleteValue(Domain* d,int variable, int e);
+
 #endif

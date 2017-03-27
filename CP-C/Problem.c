@@ -6,23 +6,23 @@
 void initQueenProblem(Problem* p,int newn ){
   p->d=newDomain(newn);
   p->n = newn;
-  Constraint cl;
-  Constraint cdm;
-  Constraint cdd;
   p->c=malloc(sizeof(Constraint)*3*(p->n)*(p->n)-3*(p->n));
   int compte = 0;
   for(int i = 0;i<p->n;i++){
     for(int j=0;j<p->n;j++){
       if(i!=j){
-        initConstraint(cl,0,0,i,j);
-        initConstraint(cdm,i,j,i,j);
-        initConstraint(cdd,-i,-j,i,j);
+        Constraint cl, cdm, cdd;
+        initConstraint(&cl,0,0,i,j);
+        initConstraint(&cdm,i,j,i,j);
+        initConstraint(&cdd,-i,-j,i,j);
+        //afficherConstraint(cl);
         (p->c)[compte]=cl;
         compte++;
         (p->c)[compte]=cdm;
         compte++;
         (p->c)[compte]=cdd;
         compte++;
+      //  effacerConstraint(cl);
       }
     }
   }
@@ -52,7 +52,7 @@ void afficherProblem(Problem p){
 bool isSolution(Domain d, Problem p){
   for(int i=0;i<d.n;i++){
     if(Length(d.LDomain[i])>1){
-      printf("taille pas bonne\n");
+      //printf("taille pas bonne\n");
       return false;
     }
   }

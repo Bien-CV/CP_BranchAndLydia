@@ -74,21 +74,17 @@ pile ** newEmptyMatricePile(){
 	return (newMatrix);
 }
 
-void afficheMatricePile(pile** mat,int len){
-	printf("On affiche le tableau de pile à l'adresse %p :\n",mat);
-	assert(len >= 0 );
-	for(int i = 0;i<len;i++){
-		
-		if(mat[i]) {
+void afficheMatricePile(pile** mat,int size){
+	assert(size >= 0 );
+	for(int i = 0;i<size;i++){
+		if(mat[i]!=NULL) {
 			printf("ligne %4d : ",i+1);
 			View(mat[i]);
 			printf("\n");
-			
 		}else{
-			printf("ligne %4d : Vide\n",i+1);
+			printf("ligne %4d : Vide\n",i);
 		}
 	}
-	printf("\n");
 	return;
 }
 
@@ -101,40 +97,40 @@ void clearMatricePile(pile** mat,int size){
 	return;
 }
 
+
 void findAndDelete(int e,pile** teteDePile){
-	
 	pile* tamponLecture=*teteDePile;
-	
+
 	if (tamponLecture->valeur==e){
 		if ( tamponLecture->prec == NULL ){
 			*teteDePile=NULL;
 			free(tamponLecture);
 			return;
-			
+
 		}else{
 			*teteDePile=tamponLecture->prec;
 			free(tamponLecture);
 			return;
-			
+
 		}
-	
+
 	}else{
 		while(tamponLecture->prec){//Tant qu'il y a un noeud precedent
 			if( (tamponLecture->prec->valeur )==e){
 				pile* tmp = tamponLecture->prec->prec;
 				free(tamponLecture->prec);
-				
+
 				tamponLecture->prec=tmp;
 				return;
 			}
 		tamponLecture=tamponLecture->prec;
-		}	
+		}
 	}
 	return;
 }
 
 int find(int e,pile** teteDePile){
-	
+
 	pile** tamponLecture=teteDePile;
 	int i=0;
 	while(*tamponLecture){
@@ -144,13 +140,24 @@ int find(int e,pile** teteDePile){
 		(*tamponLecture)=(*tamponLecture)->prec;
 		i++;
 	}
-	
+
 	return -1;
 }
 
 int isInStack(int e,pile** teteDePile){
-	
+
 	if (find(e,teteDePile)==-1)
 		return 0;
 	return 1;
+}
+
+int getValuePile(pile * p,int col){ //si on dépasse, retourne la derniere valeur
+  int ind = 0;
+  pile* tmp = p;
+  while(ind!=col&&ind<Length(p)-1){
+    ind++;
+    tmp = tmp->prec;
+  }
+  //printf("%d\n", (p)->valeur);
+  return tmp->valeur;
 }

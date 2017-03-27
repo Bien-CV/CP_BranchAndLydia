@@ -9,13 +9,13 @@ pile.o: pile.c
 
 pile_Dom.o: pile_Dom.c Domain.h
 	$(CC) -o pile_Dom.o -c pile_Dom.c -W -Wall
-	
+
 Constraint.o : Constraint.c
 	$(CC) -o Constraint.o -c Constraint.c -W -Wall
 
 Domain.o : Domain.c pile.h
 	$(CC) -o Domain.o -c Domain.c -W -Wall
-	
+
 Problem.o : Problem.c Domain.h Constraint.h
 	$(CC) -o Problem.o -c Problem.c -W -Wall
 

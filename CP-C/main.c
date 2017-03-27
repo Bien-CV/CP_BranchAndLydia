@@ -9,36 +9,21 @@
 #include "pile.h"
 #include "pile_Dom.h"
 
-Domain Prune_ForwardChecking(Problem *P,Domain D){
+Domain Prune_ForwardChecking(Problem *P,Domain D){ //et qui marche in your face
   printf("\navant Pruning\n" );
   afficherDomain(D);
-  //pour chaque variable dont il ne reste plus qu'une variable dans le domaine
-  //pour chaque contrainte ou elle est présente, on propage sur l'autre (les autres)
-  /*for(int i=0;i<P.n;i++){
-    if(Length(P.D[i])==1){
-      for(int j=0;j<P.m;j++){
-        if(P.C[j].i==i){
-          //D.LDomain[c.xi]->valeur + P.C[j].i != D.LDomain[c.xj]->valeur + P.C[j].j;
-          //D[P.C[j].j] est privé de la valeur D.LDomain[c.xi]->valeur + P.C[j].i - D.LDomain[c.xj]->valeur
-        }
-        if(P.C[j].j==i){
-          //D[P.C[j].i] est privé de la valeur D.LDomain[c.xj]->valeur + P.C[j].j - D.LDomain[c.xi]->valeur
-        }
-      }
-    }
-  }*/
-  for(int i=0;i<P->m;i++){ //MIIIIEUX -> pour chaque contrainte on verifie si une et une seule valeur est fixée
+
+  for(int i=0;i<P->m;i++){ //pour chaque contrainte on verifie si une et une seule valeur est fixée
     int lenxi = Length(D.LDomain[P->c[i].xi]);
     int lenxj = Length(D.LDomain[P->c[i].xj]);
+
     if(lenxi==1 && lenxj>1){
-      deleteValue(&D,P->c[i].xj,(P->c[i].xi+P->c[i].i-P->c[i].j));
-      printf("Variable :%d -valeur %d\n",P->c[i].xj,(P->c[i].xi+P->c[i].i-P->c[i].j));
-    //  de D[P.C[i].xj] remove (P.C[i].xi+P.C[i].i-P.C[i].j);
+      deleteValue(&D, P->c[i].xj, D.LDomain[P->c[i].xi]->valeur + P->c[i].i - P->c[i].j);
     }
 
-
-    if(lenxi>1 && lenxj==1){
-      deleteValue(&D,P->c[i].xi,(P->c[i].xj+P->c[i].j-P->c[i].i));
+    if(lenxi>1 && lenxj==1){ //pas besoin en fait, trop de contraintes deja
+      deleteValue(&D, P->c[i].xi, D.LDomain[P->c[i].xj]->valeur + P->c[i].j - P->c[i].i);
+      //printf("Variable :%d -valeur %d\n",P->c[i].xi,(P->c[i].xj+P->c[i].j-P->c[i].i));
       //de D[P.C[i].xi] remove (P.C[i].xj+P.C[i].j-P.C[i].i);
     }
   }
@@ -48,34 +33,55 @@ Domain Prune_ForwardChecking(Problem *P,Domain D){
 	return D;
 }
 
-/*bool Prune_ArcConsistency(Problem P,Domain D){ // rq : AC1
+Domain Prune_ArcConsistency(Problem* P,Domain D){ // rq : AC1
+  printf("\navant Pruning\n" );
+  afficherDomain(D);
   bool term = false;
   while(!term){
     term = true;
-    for(int i=0;i<P.m;i++){ //Pour chaque contrainte
-      //on vérifie le domaine de i par rapport à j
-      /D[i]-> domaine de la variable i
-      Tant que !domaine vide
-      on, verifie que valeur actuelle dans D[i] a un support dans D[j]
+    for(int k=0;k<P->m;k++){ //Pour chaque contrainte k
+      //on vérifie toutes les valeurs du domaine de i par rapport à celles de j
+      for(int i=0;i<Length(D.LDomain[P->c[k].xi]);i++){
+        int consistant = 0;
+        int xi = getValuePile(D.LDomain[P->c[k].xi],i);
+        for(int j=0;j<Length(D.LDomain[P->c[k].xj]);j++){
+          int xj = getValuePile(D.LDomain[P->c[k].xj],j);
+          if(validerUNEContrainte(P->c[k],xi,xj)){
+            consistant = 1;
+            break;
+          }
+        }
+
+        if(!consistant){
+          //term = false;
+          deleteValue(&D,P->c[k].xi,xi); //on enlève de xi la valeur qui va pas
+          //afficherDomain(D);
+        }
+      }
+      /*on, verifie que valeur actuelle dans D[i] a un support dans D[j]
       ie qu'il existe dans D[j] au moins une valeur telle que
       xi+i != xj+j; -> avec xi la valeur dans D[i] qu'on cherche à verifier
 
-      Si non on supprime la valeur actuelle de D[i]/
+      Si non on supprime la valeur actuelle de D[i]*/
 
-
-      //on vérifie le domaine de j par rapport à i
+      //on vérifie le domaine de j par rapport à i -> pas utile, contraintes inverses
     }
   }
-  return true;
+  printf("après Pruning\n" );
+  afficherDomain(D);
+  printf("\n" );
+  return D;
 }
 
-bool Prune_BornConsistency(Problem P,Domain D){
+Domain Prune_BornConsistency(Problem* P,Domain D){
   //pour chaque contrainte
+  for(int k=0;k<P->m;k++){
+    int ximin = getValuePile(D.LDomain[P->c[k].xi],Length(D.LDomain[P->c[k].xi]));
   //on regarde le max et le min pour i et j -> théorique, on fait pas
   //si plus de deux valeurs pour i et j (dans le cas des reines) -> ok
-}*/
-
-
+  }
+  return D;
+}
 
 
 
@@ -91,17 +97,18 @@ int BranchAndPrune(int taille){
 	Push_dom(L,*(P->d));
 
   int t=0;
-  while(t<4&&Length_dom(*L)>0){
+  while(t<30&&Length_dom(*L)>0){
     //Domain E,F,G;
     t++;
     printf("Taille de L : %d\n",Length_dom(*L));
     Domain F;
     Domain E ;
     Pop_dom(L,&F);
-    afficherDomain(F);
-    E = Prune_ForwardChecking(P,F);
+    //afficherDomain(F);
+    //E = Prune_ForwardChecking(P,F);
+    E = Prune_BornConsistency(P,F);
     afficherDomain(E);
-  /*  if(!isEmpty(E))
+    /*if(!isEmpty(E))
       afficherDomain(E);*/
 
     //printf("%d\n", verifCtes(*P,E));
@@ -163,18 +170,13 @@ int BranchAndPrune(int taille){
 
 int main()
 {
-  //BranchAndPrune(4);
-  pile ** P = newMatricePile(40);
+  BranchAndPrune(10);
+  /*pile ** P = newMatricePile(4);
   Push(P,4);
   Push(P,56);
-  Push(P,556);
-  Push(P,5426);
-  Push(P,565244);
   afficheMatricePile(P,1);
-  findAndDelete(4,P);
-  findAndDelete(565244,P);
+  printf("%d\n",getValuePile(P,0));
   afficheMatricePile(P,1);
-  
   /*Domain* testD = newDomain(4);
   Constraint c ;
   initConstraint(&c,1,1,0,0);

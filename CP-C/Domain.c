@@ -7,7 +7,7 @@
 /*
 Un domaine est représenté par un ensemble ordonné d’entiers. Ce type est muni au moins
 des opérations suivantes outre la création : copie, accès aux valeurs, suppression d’une
-valeur aux bornes, suppression d’une valeur quelconque 
+valeur aux bornes, suppression d’une valeur quelconque
 
 */
 
@@ -17,20 +17,19 @@ Domain* copyDomain(Domain* d){
 }
 
 int deleteValue(Domain* d,int variable, int e){
-	findAndDelete(e,(d->LDomain)[variable]);
+	findAndDelete(e,&(d->LDomain)[variable]); 
 	return 1;
 }
 
 int getValue(Domain* d,int variable, int col){
-	
-	return 0;
+	return getValuePile(d->LDomain[variable],col);
 }
 
 int deleteMin(Domain* d,int variable){
 	return 0;
 }
 int deleteMax(Domain* d,int variable){
-	
+
 	return 0;
 }
 
@@ -39,13 +38,13 @@ void initDomain(Domain* d, int newn){
   pile ** liste = newMatricePile(newn);
 
   if(!liste) exit(EXIT_FAILURE);
-  
+
   for(int i=0;i<newn;i++){
 	  for(int j = 0;j<newn;j++){
 		Push(&liste[i],j);
 	  }
 	}
-  
+
   d->n = newn;
   //printf("Initialisation, n = %d\n",d->n);
   d->LDomain = liste;
@@ -58,9 +57,9 @@ void initEmptyDomain(Domain* d, int nbOfVariables){
   pile ** liste = newEmptyMatricePile(nbOfVariables);
 
   if(!liste) exit(EXIT_FAILURE);
-  
-  d->n = 0;
-  
+
+  d->n = nbOfVariables;
+
   d->LDomain = liste;
 
   return;
@@ -68,9 +67,9 @@ void initEmptyDomain(Domain* d, int nbOfVariables){
 
 void addToDomain(Domain * d,int value,int variable){
 
-  if ( variable >= d->n) d->n=variable+1;
-  Push(&(d->LDomain[variable]),value);
-
+  if( variable < d->n ){
+	  Push(&(d->LDomain[variable]),value);
+	}
   return;
 }
 
@@ -85,15 +84,6 @@ Domain * newEmptyDomain(int nbOfVariables){
 	Domain* newDomain=malloc(sizeof(Domain));
 	initEmptyDomain(newDomain,nbOfVariables);
 	return newDomain;
-}
-
-void addLineToDomain(Domain * d, int * tab,int nbElem){
-	int varIndex = d->n;
-	d->n=d->n+1;
-	for(int i=0;i<nbElem;i++){
-		addToDomain(d,tab[i],varIndex);
-	}
-	return;
 }
 
 void destroyDomain(Domain* d){
@@ -128,7 +118,7 @@ int smallestDom(Domain d){
   int encours = 0;
   for(int i=0;i<d.n;i++){
     encours = Length(d.LDomain[i]);
-    if(encours<smallest){
+    if((encours<smallest)||(smallest==1)){
       smallest=encours;
       indsmallest = i;
     }

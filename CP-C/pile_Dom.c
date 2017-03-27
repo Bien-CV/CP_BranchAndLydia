@@ -39,9 +39,9 @@ void Clear_dom(pile_Dom **p)
              destroyDomainContent(head->dom);
              head = head->prec;
           }
-          
+
         head=*p;
-        
+
         pile_Dom* tmp;
         while(head)
           {
