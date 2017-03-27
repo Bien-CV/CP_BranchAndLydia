@@ -44,6 +44,9 @@ extern "C" {
 		
 		void clearMatricePile(pile** mat,int size);
 		pile ** newEmptyMatricePile();
+		void findAndDelete(int e,pile** teteDePile);
+		int find(int e,pile** teteDePile);
+		int isInStack(int e,pile** teteDePile);
 #ifdef __cplusplus
 }
 #endif
