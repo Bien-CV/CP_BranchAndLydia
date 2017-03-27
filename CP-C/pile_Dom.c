@@ -9,8 +9,9 @@
 
 void Push_dom(pile_Dom **p, Domain newDom)
 {
-        pile_Dom *element = malloc(sizeof(pile_Dom));
-        if(!element) exit(EXIT_FAILURE);     /* Si l'allocation a échouée. */
+        pile_Dom *element = calloc(1,sizeof(pile_Dom));
+        if(!element) exit(EXIT_FAILURE);     /* L'allocation a échouée. */
+        
         element->dom = newDom;
         element->prec = *p;
         *p = element;       /* Le pointeur pointe sur le dernier élément. */
@@ -55,11 +56,14 @@ void Clear_dom(pile_Dom **p)
 int Length_dom(pile_Dom *p)
 {
         int n=0;
+        if(p==NULL) return 0;
+        
         while(p)
           {
               n++;
               p = p->prec;
           }
+          printf("LEN: %d\n",n);
         return n;
 }
 

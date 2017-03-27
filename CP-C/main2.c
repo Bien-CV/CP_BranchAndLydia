@@ -19,7 +19,7 @@ void test_Domain(){
 
 }
 void test_pile(){
-	pile ** p=malloc(sizeof(pile *));
+	pile ** p=calloc(1,sizeof(pile *));
 	for(int i=0;i<3000;i++)
 		Push(p,i);
 	 Clear(p);
@@ -44,7 +44,7 @@ void test_pile_Dom(){
 	Problem*  P=newProblem(10);
 
 	pile_Dom** L=NULL;
-	L=malloc(sizeof(pile_Dom*));
+	L=calloc(1,sizeof(pile_Dom*));
 	Push_dom(L,*(P->d));
 
 	Domain pd;

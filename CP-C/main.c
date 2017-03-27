@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-
+#define NOMBRE_MAXIMUM_ITERATIONS 100000
 #include "Constraint.h"
 #include "Problem.h"
 #include "Domain.h"
@@ -91,14 +91,15 @@ int BranchAndPrune(int taille){
   pile* dxi;
 
 	Problem* P = newProblem(taille);
-	pile_Dom** L = NULL;
-  L=malloc(sizeof(pile_Dom*));
-
+	pile_Dom** L = calloc(1,sizeof(pile_Dom*));
+	
 	Push_dom(L,*(P->d));
-
+	Length_dom(*L);
   int t=0;
-  while(t<30&&Length_dom(*L)>0){
+  while((t<NOMBRE_MAXIMUM_ITERATIONS) && (Length_dom(*L)>0) ){
+	  printf("t=%d\n",t);
     //Domain E,F,G;
+   
     t++;
     printf("Taille de L : %d\n",Length_dom(*L));
     Domain F;
@@ -106,7 +107,8 @@ int BranchAndPrune(int taille){
     Pop_dom(L,&F);
     //afficherDomain(F);
     //E = Prune_ForwardChecking(P,F);
-    E = Prune_BornConsistency(P,F);
+    //E = Prune_BornConsistency(P,F);
+    E = Prune_ArcConsistency(P,F);
     afficherDomain(E);
     /*if(!isEmpty(E))
       afficherDomain(E);*/
@@ -141,15 +143,19 @@ int BranchAndPrune(int taille){
 
                 next = next->prec;
               }
-              //copit de E
+              
+              //copie de E
             }
           }
           //et on ajoute ça dans L
-          Push_dom(L,(*tempD));
+          
+          Push_dom(L,*tempD);
+          
           /*afficherDomain(E);
           printf("tempD %d\n", tempD->LDomain[1]->valeur);
           afficherDomain(*tempD);*/
           dxi = dxi->prec;
+          
         }
       }
     }
@@ -170,14 +176,14 @@ int BranchAndPrune(int taille){
 
 int main()
 {
-  BranchAndPrune(10);
+  BranchAndPrune(4);
   /*pile ** P = newMatricePile(4);
   Push(P,4);
   Push(P,56);
   afficheMatricePile(P,1);
   printf("%d\n",getValuePile(P,0));
   afficheMatricePile(P,1);
-  /*Domain* testD = newDomain(4);
+  Domain* testD = newDomain(4);
   Constraint c ;
   initConstraint(&c,1,1,0,0);
   afficherDomain(*testD);*/

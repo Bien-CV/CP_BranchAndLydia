@@ -8,7 +8,7 @@
 
 void Push(pile **p, int Val)
 {
-        pile *element = malloc(sizeof(pile));
+        pile *element = calloc(1,sizeof(pile));
         if(!element) exit(EXIT_FAILURE);     /* Si l'allocation a échouée. */
         element->valeur = Val;
         element->prec = *p;
@@ -66,11 +66,11 @@ void View(pile *p)
 }
 
 pile ** newMatricePile(int newn){
-	pile** newMatrix=malloc(sizeof(pile*)*newn);
+	pile** newMatrix=calloc(newn,sizeof(pile*));
 	return (newMatrix);
 }
 pile ** newEmptyMatricePile(){
-	pile** newMatrix=malloc(sizeof(pile*)*MAX_NB_OF_VARIABLES_EMPTY_DOMAIN);
+	pile** newMatrix=calloc(MAX_NB_OF_VARIABLES_EMPTY_DOMAIN,sizeof(pile*));
 	return (newMatrix);
 }
 
