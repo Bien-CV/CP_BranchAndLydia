@@ -9,6 +9,7 @@
 #define FWD_CHKING 0
 #define BORN_CONS 1
 #define ARC_CONS 2
+#define BACKTRK 3
     
 #include "Constraint.h"
 #include "Problem.h"
@@ -121,11 +122,11 @@ Domain Prune_BornConsistency(Problem* P,Domain D){
 
 
 
-int BranchAndPrune(int taille,int typeOfPruning){
+int BranchAndPrune(int taille,int typeOfPruning,int* nbSolutions){
   int xi;
   //Domain* E = newDomain(taille);//,F,G;
   pile* dxi;
-
+	*nbSolutions=0;
 	Problem* P = newProblem(taille);
 	pile_Dom** L = calloc(1,sizeof(pile_Dom*));
 	
@@ -134,17 +135,19 @@ int BranchAndPrune(int taille,int typeOfPruning){
   int t=0;
   while((t<NOMBRE_MAXIMUM_ITERATIONS) && (Length_dom(*L)>0) ){
     //Domain E,F,G;
-   
+    
     t++;
     AFFICHAGE_STANDARD printf("Taille de L : %d\n",Length_dom(*L));
     Domain F;
     Domain E ;
     Pop_dom(L,&F);
     //afficherDomain(F);
-    
     if ( typeOfPruning == FWD_CHKING ) E = Prune_ForwardChecking(P,F);
     if ( typeOfPruning == BORN_CONS ) E = Prune_BornConsistency(P,F);
     if ( typeOfPruning == ARC_CONS ) E = Prune_ArcConsistency(P,F);
+    if ( typeOfPruning == BACKTRK ) {
+		E = F;
+    }
     AFFICHAGE_STANDARD afficherDomain(E);
     /*if(!isEmpty(E))
       afficherDomain(E);*/
@@ -157,6 +160,7 @@ int BranchAndPrune(int taille,int typeOfPruning){
     else{
       if(isSolution(E,*P)){
         AFFICHAGE_STANDARD printf("Une solution a été trouvée.\n");
+        *nbSolutions=(*nbSolutions)+1;
         printSolution(E);
       }
       else{
@@ -212,7 +216,7 @@ void showLogCSV(timeLog* log){
 	
 	for (int i=0;i< (log->nbOfRecords );i++){
 		if ( (log->records)[i].pruneType == FWD_CHKING ) printf("FWD_CHKING;");
-		if ( (log->records)[i].pruneType == BORN_CONS ) printf("BORN_CONS;");
+		if ( (log->records)[i].pruneType == BACKTRK ) printf("BACKTRK;");
 		if ( (log->records)[i].pruneType == ARC_CONS ) printf("ARC_CONS;");
 		printf("%d;",(log->records)[i].sizeFactor);
 		printf("%s;%lu;\n",(log->records)[i].name,(log->records)[i].stop);
@@ -247,33 +251,37 @@ int main()
   int maxNameLen = 200;
   char* buffer=calloc(maxNameLen,sizeof(char));
   int timerIndex;
-  int maxNbOfIterations = 20;
-  
+  int maxNbOfIterations = 15;
+  int* nbSolutions=calloc(1,sizeof(int));
+ 
   for(int i=1;i<maxNbOfIterations;incrementer(&i)){
 	TIMER_ON snprintf ( buffer, maxNameLen, "BranchAndPrune(%d,FWD_CHKING)",i);  
 	TIMER_ON timerIndex= newTimer(log,buffer,FWD_CHKING, i);
-	BranchAndPrune(i,FWD_CHKING);
+	BranchAndPrune(i,FWD_CHKING,nbSolutions);
 	TIMER_ON stopTimer(log, timerIndex);  
+	//printf("Nb Solutions : %d\n",(*nbSolutions));
 	AFFICHAGE_STANDARD printf("Done i = %d\n",i);
-  }
+  }/*
   for(int i=1;i<maxNbOfIterations;incrementer(&i)){
-	TIMER_ON snprintf ( buffer, maxNameLen, "BranchAndPrune(%d,BORN_CONS)",i);  
-	TIMER_ON timerIndex= newTimer(log,buffer,BORN_CONS,i);
-	BranchAndPrune(i,BORN_CONS);
+	TIMER_ON snprintf ( buffer, maxNameLen, "BranchAndPrune(%d,BACKTRK)",i);  
+	TIMER_ON timerIndex= newTimer(log,buffer,BACKTRK,i);
+	BranchAndPrune(i,BACKTRK,nbSolutions);
 	TIMER_ON stopTimer(log, timerIndex);  
+	//printf("Nb Solutions : %d\n",*nbSolutions);
 	AFFICHAGE_STANDARD printf("Done i = %d\n",i);
-  }
+  }/*
   for(int i=1;i<maxNbOfIterations;incrementer(&i)){
 	TIMER_ON snprintf ( buffer, maxNameLen, "BranchAndPrune(%d,ARC_CONS)",i);  
 	TIMER_ON timerIndex= newTimer(log,buffer,ARC_CONS,i);
-	BranchAndPrune(i,ARC_CONS);
+	BranchAndPrune(i,ARC_CONS,nbSolutions);
 	TIMER_ON stopTimer(log, timerIndex);  
+	//printf("Nb Solutions : %d\n",*nbSolutions);
 	AFFICHAGE_STANDARD printf("Done i = %d\n",i);
-  }
+  }*/
   
   
   TIMER_ON showLogCSV(log);
-  
+  free(nbSolutions);
   destroyLog(log);
   free(log);
   free(buffer);
