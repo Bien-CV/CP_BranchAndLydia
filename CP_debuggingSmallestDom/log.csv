@@ -1,0 +1,17 @@
+type de pruning;taille de l'échiquier;nom du timer;durée en temps CPU;
+FWD_CHKING;1;BranchAndPrune(1,FWD_CHKING);24;
+FWD_CHKING;4;BranchAndPrune(4,FWD_CHKING);149;
+FWD_CHKING;7;BranchAndPrune(7,FWD_CHKING);8887;
+FWD_CHKING;10;BranchAndPrune(10,FWD_CHKING);5457424;
+FWD_CHKING;13;BranchAndPrune(13,FWD_CHKING);11541384;
+BORN_CONS;1;BranchAndPrune(1,BORN_CONS);2;
+BORN_CONS;4;BranchAndPrune(4,BORN_CONS);326;
+BORN_CONS;7;BranchAndPrune(7,BORN_CONS);77696;
+BORN_CONS;10;BranchAndPrune(10,BORN_CONS);6363419;
+BORN_CONS;13;BranchAndPrune(13,BORN_CONS);20719808;
+ARC_CONS;1;BranchAndPrune(1,ARC_CONS);3;
+ARC_CONS;4;BranchAndPrune(4,ARC_CONS);120;
+ARC_CONS;7;BranchAndPrune(7,ARC_CONS);9297;
+ARC_CONS;10;BranchAndPrune(10,ARC_CONS);7023390;
+ARC_CONS;13;BranchAndPrune(13,ARC_CONS);13924161;
+
