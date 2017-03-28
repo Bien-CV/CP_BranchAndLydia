@@ -63,7 +63,6 @@ int Length_dom(pile_Dom *p)
               n++;
               p = p->prec;
           }
-          printf("LEN: %d\n",n);
         return n;
 }
 
