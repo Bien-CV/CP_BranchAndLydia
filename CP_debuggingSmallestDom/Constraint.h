@@ -5,11 +5,11 @@
 
 typedef struct Constraint
 {
-  int i;//fixe
-  int j;//fixe
-  int xi;
-  int xj;
-}Constraint;
+    int i;//fixe
+    int j;//fixe
+    int xi;
+    int xj;
+} Constraint;
 
 void initConstraint(Constraint* c, int newi, int newj, int newxi, int newxj);
 void afficherConstraint(Constraint c);

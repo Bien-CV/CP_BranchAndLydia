@@ -3,13 +3,13 @@
 
 #include "Domain.h"
 
- /*  Structure représantant un élément de la pile. */
+/*  Structure représantant un élément de la pile. */
 
-        typedef struct pile_Dom
-        {
-                Domain dom;
-                struct pile_Dom *prec;
-        } pile_Dom ;
+typedef struct pile_Dom
+{
+    Domain dom;
+    struct pile_Dom *prec;
+} pile_Dom ;
 
 #ifdef __cplusplus
 extern "C" {
